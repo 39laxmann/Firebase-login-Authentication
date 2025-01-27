@@ -9,6 +9,6 @@ This is a project i made ,that demonstrates a simple authentication system using
 - **User Logout**: Authenticated users can log out of their account.
 
 
-##Contributing
+## Contributing
 
 Contributions are welcome! Please fork the repository and create a pull request with your changes.
