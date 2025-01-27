@@ -20,39 +20,37 @@ const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
 //handle google sign in
-const handleGoogleLogin = async (setError)=>{
+const handleGoogleLogin = async (setError) => {
   try {
     const result = await signInWithPopup(auth, googleProvider);
     console.log('Google Sign-In:', result.user);
     setError('');
-    
+
   } catch (err) {
     console.log(err);
     setError('Google Sign-In failed');
-    
+
   }
 }
 
 //handle email and password login
-const handleEmailLogin = async (e, setError)=>{
-  e.prevenDefault();
+const handleEmailLogin = async (e, setError) => {
+  e.preventDefault();
   const email = e.target.email.value;
-  const password = e.target.password.value
+  const password = e.target.password.value;
+
+  try {
+    const userCred = await signInWithEmailAndPassword(auth, email, password);
+    console.log('User signed in:', userCred.user);
+    setError('');
+  } catch (err) {
+    console.log(err);
+    setError('Invalid email or password');
+  }
+  e.target.reset();
 }
-try {
-  const userCred = await signInWithEmailAndPassword(auth, email, password);
-  console.log('User signed in:', userCred.user);
-  setError('');
-
-  
-} catch (err) {
-  console.log(err);
-  setError('Invalid email or password');
-  
-}
-e.target.reset();
-  
 
 
-export {auth, googleProvider, handleGoogleLogin, handleEmailLogin}
+
+export { auth, googleProvider, handleGoogleLogin, handleEmailLogin }
 
